@@ -89,8 +89,7 @@ var finances = [
 
 // store the length of the array as the total months
 var totalMonths = finances.length;
-// store the last index number to use later instead of finances.length - 1 
-var lastIndex = finances.length - 1;
+
 // totalAmount will store the total of profit and losses for the whole period, need to initialise as 0 because would not recognise as a number in the below for loop
 var totalAmount = 0;
 
@@ -100,11 +99,11 @@ for (var i = 0; i < finances.length; i++) {
     // accessing index 1 of each array within the finances array to get the profit / loss value
     totalAmount += finances[i][1];
 }
-console.log(finances);
 
 
 // calculate the average changes using a for loop to add the values from the array, initialise at 0
-var averageChanges = 0;
+
+
 var profitLoss = [];
 // use lastIndex so when the counter reaches 85, 1 is added, this stops an error occuring because it will go passed the last index if I use finances.length
 // var cell1 = 0;
@@ -116,11 +115,17 @@ for (var i = 0; i < finances.length; i++) {
     }  
 }
 
-console.log(profitLoss);
+var averageChanges = 0;
+
+for (var i = 0; i < profitLoss.length; i++) {
+    averageChanges += profitLoss[i][1];
+}
+
+averageChanges = (averageChanges / totalMonths).toFixed(2);
 
 profitLoss = profitLoss.sort(([a, b], [c, d]) => d - b);
 
-console.log(profitLoss);
+
 // for (var i = 0; i < finances.length; i++) {
 //     // // get the value of the next item in the array and subtract the current item to get the change between each month
 //     // averageChanges += (finances[i + 1][1] - finances[i][1]);
@@ -137,7 +142,7 @@ console.log(profitLoss);
 // found how to sort numbers within the arrays within the array from stackoverflow (https://stackoverflow.com/questions/50415200/sort-an-array-of-arrays-in-javascript)
 // finances = finances.sort(([a, b], [c, d]) => d - b);
 
-lastIndex = profitLoss.length - 1;
+var lastIndex = profitLoss.length - 1;
 
 // can now get the greatest increase value and gretest loss value from index 0 (the first) and last index respectively
 var greatestProfit = profitLoss[0][0] + " ($" + profitLoss[0][1] + ")";
