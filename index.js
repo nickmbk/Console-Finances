@@ -86,3 +86,8 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+// use variable totalMonths to find the length of the finances array, this will give the total months in the data set
+var totalMonths = finances.length;
+
+console.log("Total Amount of Months: " + totalMonths);
