@@ -94,61 +94,48 @@ var totalMonths = finances.length;
 var totalAmount = 0;
 
 // calculate the total amount of profit/losses over the entire period
-// initially reused totalMonths variable as it holds the length of the finances array but decided to use finances.length to not confuse the code
+// initially reused totalMonths variable as it holds the length of the finances array but decided to use finances.length to avoid confusion and for readability
 for (var i = 0; i < finances.length; i++) {
     // accessing index 1 of each array within the finances array to get the profit / loss value
     totalAmount += finances[i][1];
 }
 
-
-// calculate the average changes using a for loop to add the values from the array, initialise at 0
-
-
+// create and initiate (as an array) a profitLoss array to store the changes in profit and loss over each month, this will be used a few times to get data
 var profitLoss = [];
-// use lastIndex so when the counter reaches 85, 1 is added, this stops an error occuring because it will go passed the last index if I use finances.length
-// var cell1 = 0;
-// var cell2 = 0;
 
+// calculate the profit/loss each month and add it to the new profitLoss array
 for (var i = 0; i < finances.length; i++) {
+    // to avoid trying to calculate the first month (0 index) against an index that doesn't exist (-1) I've used an if statement to only add to the array if i is not 0, so it will skip the first time, this eliminates an error and makes the code work when I condense everything to one for loop
     if (i !== 0) {
+        // get the value of the current index in the array and subtract the index before it to get the change between each month
         profitLoss.push([finances[i][0], finances[i][1] - finances[i - 1][1]]);
     }  
 }
 
+// now the profitLoss array has been completed we can calculate the average changes in the profit and loss and store it in the averageChanges variable
 var averageChanges = 0;
 
+// adds all the profit and losses together
 for (var i = 0; i < profitLoss.length; i++) {
     averageChanges += profitLoss[i][1];
 }
 
+// calculates the average and puts to two decimal places
+// needed to bring the decimal places down to two found this soluton on stackoverflow, to use .toFixed(2) (https://stackoverflow.com/questions/3163070/javascript-displaying-a-float-to-2-decimal-places)
 averageChanges = (averageChanges / totalMonths).toFixed(2);
 
+// sort the profitLoss array to be able to get the values for the greatest profit and the greatest loss
+// found how to sort numbers within the arrays within the array from stackoverflow (https://stackoverflow.com/questions/50415200/sort-an-array-of-arrays-in-javascript)
 profitLoss = profitLoss.sort(([a, b], [c, d]) => d - b);
 
-
-// for (var i = 0; i < finances.length; i++) {
-//     // // get the value of the next item in the array and subtract the current item to get the change between each month
-//     // averageChanges += (finances[i + 1][1] - finances[i][1]);
-//     var j = i - 1;
-//     cell1 = finances[i][1];
-//     cell2 = finances[j][1];
-//     profitLoss.push([finances[i][0], cell1 - cell2]);
-// }
-// // needed to bring the decimal places down to two found this soluton on stackoverflow, to use .toFixed(2) (https://stackoverflow.com/questions/3163070/javascript-displaying-a-float-to-2-decimal-places)
-// console.log(profitLoss);
-// averageChanges = (averageChanges / totalMonths).toFixed(2);
-
-//sort array by profit/loss values
-// found how to sort numbers within the arrays within the array from stackoverflow (https://stackoverflow.com/questions/50415200/sort-an-array-of-arrays-in-javascript)
-// finances = finances.sort(([a, b], [c, d]) => d - b);
-
+// store the last index number of the profitLoss array minus 1 in the lastIndex variable to get the number of the last entry for the greatest loss statistic, did this for better readability
 var lastIndex = profitLoss.length - 1;
 
-// can now get the greatest increase value and gretest loss value from index 0 (the first) and last index respectively
+// can now get the greatest increase value and gretest loss value from index 0 (the first) and last index respectively, store them in variables to make the console log statement look a little tidier
 var greatestProfit = profitLoss[0][0] + " ($" + profitLoss[0][1] + ")";
 var greatestLoss = profitLoss[lastIndex][0] + " ($" + profitLoss[lastIndex][1] + ")";
 
-
+// console log all the statistics
 console.log("Financial Analysis\n----------------------------\nTotal Months: " + totalMonths + 
 "\nTotal: $" + totalAmount + "\nAverage  Change: $" + averageChanges + "\nGreatest Increase in Profits: "
  + greatestProfit + "\nGreatest Decrease in Profits: " + greatestLoss);
