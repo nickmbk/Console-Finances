@@ -93,18 +93,16 @@ var totalMonths = finances.length;
 // totalAmount will store the total of profit and losses for the whole period, need to initialise as 0 because would not recognise as a number in the below for loop
 var totalAmount = 0;
 
-// calculate the total amount of profit/losses over the entire period
+// create and initiate (as an array) a profitLoss array to store the changes in profit and loss over each month, this will be used a few times to get data
+var profitLoss = [];
+
+
+
+// calculate the total amount of profit/losses over the entire period whilst pushing each difference between each months profit/loss to the new  profitLoss array (originally two seprate for loops but combined to reduce code)
 // initially reused totalMonths variable as it holds the length of the finances array but decided to use finances.length to avoid confusion and for readability
 for (var i = 0; i < finances.length; i++) {
     // accessing index 1 of each array within the finances array to get the profit / loss value
     totalAmount += finances[i][1];
-}
-
-// create and initiate (as an array) a profitLoss array to store the changes in profit and loss over each month, this will be used a few times to get data
-var profitLoss = [];
-
-// calculate the profit/loss each month and add it to the new profitLoss array
-for (var i = 0; i < finances.length; i++) {
     // to avoid trying to calculate the first month (0 index) against an index that doesn't exist (-1) I've used an if statement to only add to the array if i is not 0, so it will skip the first time, this eliminates an error and makes the code work when I condense everything to one for loop
     if (i !== 0) {
         // get the value of the current index in the array and subtract the index before it to get the change between each month
@@ -112,7 +110,7 @@ for (var i = 0; i < finances.length; i++) {
     }  
 }
 
-// now the profitLoss array has been completed we can calculate the average changes in the profit and loss and store it in the averageChanges variable
+// when the profitLoss array has been completed we can calculate the average changes in the profit and loss and store it in the averageChanges variable
 var averageChanges = 0;
 
 // adds all the profit and losses together
