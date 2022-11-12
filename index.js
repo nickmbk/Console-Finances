@@ -108,8 +108,16 @@ for (var i = 0; i < totalMonths - 1; i++) {
 // needed to bring the decimal places down to two found this soluton on stackoverflow, to use .toFixed(2) (https://stackoverflow.com/questions/3163070/javascript-displaying-a-float-to-2-decimal-places)
 averageChanges = (averageChanges / totalMonths).toFixed(2);
 
+//sort array by profit/loss values
+// found how to sort numbers within the arrays within the array from stackoverflow (https://stackoverflow.com/questions/50415200/sort-an-array-of-arrays-in-javascript)
+finances = finances.sort(([a, b], [c, d]) => d - b);
 
+// can now get the greatest increase value and gretest loss value from index 0 (the first) and last index respectively
+var greatestProfit = finances[0][0] + " ($" + finances[0][1] + ")";
+var greatestLoss = finances[totalMonths - 1][0] + " ($" + finances[totalMonths - 1][1] + ")";
 
 console.log("Total Amount of Months: " + totalMonths);
 console.log("Total amount of profits/losses: $" + totalAmount);
 console.log("Average Changes: $" + averageChanges);
+console.log("Greatest Profit: " + greatestProfit);
+console.log("Greatest Loss: " + greatestLoss);
