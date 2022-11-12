@@ -96,8 +96,6 @@ var totalAmount = 0;
 // create and initiate (as an array) a profitLoss array to store the changes in profit and loss over each month, this will be used a few times to get data
 var profitLoss = [];
 
-
-
 // calculate the total amount of profit/losses over the entire period whilst pushing each difference between each months profit/loss to the new  profitLoss array (originally two seprate for loops but combined to reduce code)
 // initially reused totalMonths variable as it holds the length of the finances array but decided to use finances.length to avoid confusion and for readability
 for (var i = 0; i < finances.length; i++) {
