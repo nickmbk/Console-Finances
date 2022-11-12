@@ -87,18 +87,29 @@ var finances = [
 ['Feb-2017', 671099]
 ];
 
-// use variable totalMonths to find the length of the finances array, this will give the total months in the data set
+// store the length of the array as the total months
 var totalMonths = finances.length;
 // totalAmount will store the total of profit and losses for the whole period, need to initialise as 0 because would not recognise as a number in the below for loop
 var totalAmount = 0;
 
-// usse a for loop to iterate over the array and use totalAmount to sum up the profit/losses values
+// calculate the total amount of profit/losses over the entire period
 // reuse totalMonths instead of using finances.length again, as it is already stored in the variable
 for (var i = 0; i < totalMonths; i++) {
     totalAmount += finances[i][1];
 }
 
+// calculate the average changes using a for loop to add the values from the array
+var averageChanges = 0;
+// need to use totalMonths - 1 because I am using i + 1 in the calculations, so when the counter reaches 85, 1 is added, this causes an error
+for (var i = 0; i < totalMonths - 1; i++) {
+    // get the value of the next item in the array and subtract the current item to get the change between each month
+    averageChanges += (finances[i + 1][1] - finances[i][1]);
+}
+// needed to bring the decimal places down to two found this soluton on stackoverflow, to use .toFixed(2) (https://stackoverflow.com/questions/3163070/javascript-displaying-a-float-to-2-decimal-places)
+averageChanges = (averageChanges / totalMonths).toFixed(2);
+
 
 
 console.log("Total Amount of Months: " + totalMonths);
-console.log("Total amount of profits/losses: " + totalAmount);
+console.log("Total amount of profits/losses: $" + totalAmount);
+console.log("Average Changes: $" + averageChanges);
