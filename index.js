@@ -100,6 +100,7 @@ for (var i = 0; i < finances.length; i++) {
     // accessing index 1 of each array within the finances array to get the profit / loss value
     totalAmount += finances[i][1];
 }
+console.log(finances);
 
 
 // calculate the average changes using a for loop to add the values from the array, initialise at 0
@@ -109,14 +110,17 @@ var profitLoss = [];
 // var cell1 = 0;
 // var cell2 = 0;
 
-for (var i = finances.length; i >0; i--) {
-    if (i === finances.length) {
-        i = finances.length - 1;
-    }
-    profitLoss.push([finances[i][0], finances[i][1] - finances[i -1][1]]);
+for (var i = 0; i < finances.length; i++) {
+    if (i !== 0) {
+        profitLoss.push([finances[i][0], finances[i][1] - finances[i - 1][1]]);
+    }  
 }
+
 console.log(profitLoss);
 
+profitLoss = profitLoss.sort(([a, b], [c, d]) => d - b);
+
+console.log(profitLoss);
 // for (var i = 0; i < finances.length; i++) {
 //     // // get the value of the next item in the array and subtract the current item to get the change between each month
 //     // averageChanges += (finances[i + 1][1] - finances[i][1]);
@@ -133,9 +137,11 @@ console.log(profitLoss);
 // found how to sort numbers within the arrays within the array from stackoverflow (https://stackoverflow.com/questions/50415200/sort-an-array-of-arrays-in-javascript)
 // finances = finances.sort(([a, b], [c, d]) => d - b);
 
+lastIndex = profitLoss.length - 1;
+
 // can now get the greatest increase value and gretest loss value from index 0 (the first) and last index respectively
-// var greatestProfit = finances[0][0] + " ($" + finances[0][1] + ")";
-// var greatestLoss = finances[lastIndex][0] + " ($" + finances[lastIndex][1] + ")";
+var greatestProfit = profitLoss[0][0] + " ($" + profitLoss[0][1] + ")";
+var greatestLoss = profitLoss[lastIndex][0] + " ($" + profitLoss[lastIndex][1] + ")";
 
 
 console.log("Total Amount of Months: " + totalMonths);
