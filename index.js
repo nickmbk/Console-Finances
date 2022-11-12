@@ -84,37 +84,59 @@ var finances = [
 ['Nov-2016', 795914],
 ['Dec-2016', 60988],
 ['Jan-2017', 138230],
-['Feb-2017', 671099]
+['Feb-2017', 671099] //85
 ];
 
 // store the length of the array as the total months
 var totalMonths = finances.length;
+// store the last index number to use later instead of finances.length - 1 
+var lastIndex = finances.length - 1;
 // totalAmount will store the total of profit and losses for the whole period, need to initialise as 0 because would not recognise as a number in the below for loop
 var totalAmount = 0;
 
 // calculate the total amount of profit/losses over the entire period
-// reuse totalMonths instead of using finances.length again, as it is already stored in the variable
-for (var i = 0; i < totalMonths; i++) {
+// initially reused totalMonths variable as it holds the length of the finances array but decided to use finances.length to not confuse the code
+for (var i = 0; i < finances.length; i++) {
+    // accessing index 1 of each array within the finances array to get the profit / loss value
     totalAmount += finances[i][1];
 }
 
-// calculate the average changes using a for loop to add the values from the array
+
+// calculate the average changes using a for loop to add the values from the array, initialise at 0
 var averageChanges = 0;
-// need to use totalMonths - 1 because I am using i + 1 in the calculations, so when the counter reaches 85, 1 is added, this causes an error
-for (var i = 0; i < totalMonths - 1; i++) {
-    // get the value of the next item in the array and subtract the current item to get the change between each month
-    averageChanges += (finances[i + 1][1] - finances[i][1]);
+var profitLoss = [];
+// use lastIndex so when the counter reaches 85, 1 is added, this stops an error occuring because it will go passed the last index if I use finances.length
+// var cell1 = 0;
+// var cell2 = 0;
+
+for (var i = finances.length; i >0; i--) {
+    if (i === finances.length) {
+        i = finances.length - 1;
+    }
+    profitLoss.push([finances[i][0], finances[i][1] - finances[i -1][1]]);
 }
-// needed to bring the decimal places down to two found this soluton on stackoverflow, to use .toFixed(2) (https://stackoverflow.com/questions/3163070/javascript-displaying-a-float-to-2-decimal-places)
-averageChanges = (averageChanges / totalMonths).toFixed(2);
+console.log(profitLoss);
+
+// for (var i = 0; i < finances.length; i++) {
+//     // // get the value of the next item in the array and subtract the current item to get the change between each month
+//     // averageChanges += (finances[i + 1][1] - finances[i][1]);
+//     var j = i - 1;
+//     cell1 = finances[i][1];
+//     cell2 = finances[j][1];
+//     profitLoss.push([finances[i][0], cell1 - cell2]);
+// }
+// // needed to bring the decimal places down to two found this soluton on stackoverflow, to use .toFixed(2) (https://stackoverflow.com/questions/3163070/javascript-displaying-a-float-to-2-decimal-places)
+// console.log(profitLoss);
+// averageChanges = (averageChanges / totalMonths).toFixed(2);
 
 //sort array by profit/loss values
 // found how to sort numbers within the arrays within the array from stackoverflow (https://stackoverflow.com/questions/50415200/sort-an-array-of-arrays-in-javascript)
-finances = finances.sort(([a, b], [c, d]) => d - b);
+// finances = finances.sort(([a, b], [c, d]) => d - b);
 
 // can now get the greatest increase value and gretest loss value from index 0 (the first) and last index respectively
-var greatestProfit = finances[0][0] + " ($" + finances[0][1] + ")";
-var greatestLoss = finances[totalMonths - 1][0] + " ($" + finances[totalMonths - 1][1] + ")";
+// var greatestProfit = finances[0][0] + " ($" + finances[0][1] + ")";
+// var greatestLoss = finances[lastIndex][0] + " ($" + finances[lastIndex][1] + ")";
+
 
 console.log("Total Amount of Months: " + totalMonths);
 console.log("Total amount of profits/losses: $" + totalAmount);
