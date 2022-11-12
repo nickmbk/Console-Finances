@@ -89,5 +89,16 @@ var finances = [
 
 // use variable totalMonths to find the length of the finances array, this will give the total months in the data set
 var totalMonths = finances.length;
+// totalAmount will store the total of profit and losses for the whole period, need to initialise as 0 because would not recognise as a number in the below for loop
+var totalAmount = 0;
+
+// usse a for loop to iterate over the array and use totalAmount to sum up the profit/losses values
+// reuse totalMonths instead of using finances.length again, as it is already stored in the variable
+for (var i = 0; i < totalMonths; i++) {
+    totalAmount += finances[i][1];
+}
+
+
 
 console.log("Total Amount of Months: " + totalMonths);
+console.log("Total amount of profits/losses: " + totalAmount);
