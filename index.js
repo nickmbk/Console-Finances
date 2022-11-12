@@ -134,6 +134,15 @@ var greatestProfit = profitLoss[0][0] + " ($" + profitLoss[0][1] + ")";
 var greatestLoss = profitLoss[lastIndex][0] + " ($" + profitLoss[lastIndex][1] + ")";
 
 // console log all the statistics
-console.log("Financial Analysis\n----------------------------\nTotal Months: " + totalMonths + 
-"\nTotal: $" + totalAmount + "\nAverage  Change: $" + averageChanges + "\nGreatest Increase in Profits: "
- + greatestProfit + "\nGreatest Decrease in Profits: " + greatestLoss);
+console.log(
+    "Financial Analysis\n----------------------------\nTotal Months: " + 
+    totalMonths + 
+    "\nTotal: $" + 
+    totalAmount + 
+    "\nAverage  Change: $" + 
+    averageChanges + 
+    "\nGreatest Increase in Profits: " + 
+    greatestProfit + 
+    "\nGreatest Decrease in Profits: " + 
+    greatestLoss
+ );
